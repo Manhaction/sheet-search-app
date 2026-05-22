@@ -19,12 +19,15 @@ async function searchData() {
 
     data.forEach(item => {
 
-        resultsDiv.innerHTML += `
-            <div class="card">
-                <p><strong>ID:</strong> ${item.ID}</p>
-                <p><strong>Name:</strong> ${item.Name}</p>
-                <p><strong>Phone:</strong> ${item.Phone}</p>
-            </div>
+        let html = '<div class="card">';
+
+for (const key in item) {
+    html += `<p><strong>${key}:</strong> ${item[key]}</p>`;
+}
+
+html += '</div>';
+
+resultsDiv.innerHTML += html;
         `;
     });
 }
