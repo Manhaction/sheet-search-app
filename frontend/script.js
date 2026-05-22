@@ -17,16 +17,57 @@ async function searchData() {
         return;
     }
 
+    // Lấy tên cột
+    const headers = Object.keys(data[0]);
+
+    let table = '<table>';
+
+    // Header
+    table += '<tr>';
+
+    headers.forEach(header => {
+        table += `<th>${header}</th>`;
+    });
+
+    table += '</tr>';
+
+    // Data rows
     data.forEach(item => {
 
-       let html = '<div class="card">';
+        table += '<tr>';
 
-for (const key in item) {
-    html += `<p><strong>${key}:</strong> ${item[key]}</p>`;
-}
+        headers.forEach(header => {
 
-html += '</div>';
+            // Nếu là cột Image thì hiện ảnh
+            if (header.toLowerCase() === 'image') {
 
-resultsDiv.innerHTML += html;
+                table += `
+                    <td>
+                        <img src="${item[header]}"
+                             class="table-image">
+                    </td>
+                `;
+
+            } else {
+
+                table += `<td>${item[header]}</td>`;
+            }
+        });
+
+        table += '</tr>';
     });
+
+    table += '</table>';
+
+    resultsDiv.innerHTML = table;
 }
+
+
+// ENTER để search
+document.getElementById('searchInput')
+    .addEventListener('keypress', function(event) {
+
+        if (event.key === 'Enter') {
+            searchData();
+        }
+    });
