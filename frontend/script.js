@@ -19,7 +19,7 @@ async function searchData() {
 
     data.forEach(item => {
 
-        let html = '<div class="card">';
+       let html = '<div class="card">';
 
 for (const key in item) {
     html += `<p><strong>${key}:</strong> ${item[key]}</p>`;
@@ -28,6 +28,5 @@ for (const key in item) {
 html += '</div>';
 
 resultsDiv.innerHTML += html;
-        `;
     });
 }
