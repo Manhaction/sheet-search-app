@@ -19,7 +19,7 @@ def search_data():
 
     for _, row in df.iterrows():
 
-        row_dict = row.to_dict()
+        row_dict = row.fillna("").to_dict()
 
         if any(keyword in str(value).lower() for value in row_dict.values()):
             results.append(row_dict)
